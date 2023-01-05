@@ -1,4 +1,4 @@
-import 'package:animated_food_app/src/presentation/screens/export_screens.dart';
+import 'package:animated_food_app/src/views/screens/export_screens.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
