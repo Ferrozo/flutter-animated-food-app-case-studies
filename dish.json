@@ -1,0 +1,38 @@
+[
+    {
+        "tilte": "Skillet Chicken Parmesan with Artichokes",
+        "img":"01",
+        "price": 0.0,
+        "description":"Chopped rotisserie chicken stands in for whole chicken breasts in this timesaving skillet dinner from Food Network Magazine. Though the process is simplified, all of the usual accoutrements are here: San Marzano tomatoes, mozzarella cheese and fresh basil. Throw in some thawed artichoke hearts for more meaty texture."
+    },
+    {
+        "tilte": "One-Pot Super Easy Fusilli",
+        "img":"02",
+        "price": 0.0,
+        "description":"This dinner is as simple as dumping everything into a pot — dry noodles, tomatoes and all — and letting it simmer. The liquid from the stock will absorb into the pasta and create a rich, flavorful sauce."
+    },
+    {
+        "tilte": "Mexican Tortilla Pizzas with Chorizo",
+        "img":"03",
+        "price": 0.0,
+        "description":"Creamy avocado and smoky chorizo crumbles unite over a crunchy baked tortilla in this easy Mexican pizza recipe. Refried beans stand in for classic tomato sauce, and Oaxaca cheese makes an excellent substitute for standard mozzarella."
+    },
+    {
+        "tilte": "Lemon-Garlic Skillet Chicken and Potatoes",
+        "img":"04",
+        "price": 0.0,
+        "description":"For once, water and oil work together to make a magical one-skillet weeknight chicken dinner. Potatoes cook alongside crispy chicken thighs — first they boil in water until tender, and then fry into golden nuggets in the remaining oil."
+    },
+    {
+        "tilte": "Grilled Chicken Quarters with Ras el Hanout",
+        "img":"05",
+        "price": 0.0,
+        "description":"Ras el hanout is a blend made of several spices so it’s worth keeping in your pantry as a powerhouse ingredient. Here, it adds tremendous depth and complexity to an easy yogurt marinade, which doesn’t need much more than lemon juice and a few cloves of garlic to brighten the flavor of grilled chicken legs. Scoring the chicken a few times helps it better absorb the marinade and the yogurt makes it extremely juicy. Complete this flavor-packed dish with a side of potatoes, rice or salad."
+    },
+    {
+        "tilte": "Chicken Fajita Salad",
+        "img":"06",
+        "price": 0.0,
+        "description":"Ree puts a fresh twist on the charcuterie board with her fun and festive salad, which is cooked from start to finish on the grill."
+    }
+]
