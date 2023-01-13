@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:animated_food_app/src/views/widgets/export_widget.dart';
 
@@ -13,8 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late PageController _pageController;
-  final int _currentIndex = 0;
+  final PageController _pageController = PageController(viewportFraction: 0.6);
+  int _currentPage = 0;
   final List<DishModel> dishList = [
     DishModel(
       name: 'Skillet Chicken',
@@ -32,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       price: 2.0,
     ),
     DishModel(
-      name: 'Lemon-Garlic Skillet',
+      name: 'Lemon-Garlic',
       img: 'src/assets/04.png',
       price: 2.0,
     ),
@@ -44,8 +42,14 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   void initState() {
-    _pageController =
-        PageController(initialPage: _currentIndex, viewportFraction: 0.7);
+    _pageController.addListener(() {
+      int next = _pageController.page!.round();
+      if (_currentPage != next) {
+        setState(() {
+          _currentPage = next;
+        });
+      }
+    });
     super.initState();
   }
 
@@ -63,42 +67,25 @@ class _HomePageState extends State<HomePage> {
           const MainAppBar(),
           const SizedBox(height: 40),
           AspectRatio(
-            aspectRatio: 0.6,
+            aspectRatio: 1.2,
             child: PageView.builder(
               controller: _pageController,
-              physics: const ClampingScrollPhysics(),
+              // physics: const ClampingScrollPhysics(),
               itemCount: dishList.length,
-              itemBuilder: (context, index) {
-                return dishScroll(index);
+              itemBuilder: (_, currentIndex) {
+                bool activePage = currentIndex == _currentPage;
+                return DishCard(
+                  isActive: activePage,
+                  dishInfo: dishList[currentIndex],
+                );
               },
             ),
           ),
+          DishInfo(
+              dishTitle: dishList[_currentPage].name,
+              dishPrice: dishList[_currentPage].price),
         ],
       ),
-    );
-  }
-
-  Widget dishScroll(int index) {
-    return AnimatedBuilder(
-      animation: _pageController,
-      builder: ((context, child) {
-        double value = 0.0;
-        if (_pageController.position.haveDimensions) {
-          value = index.toDouble() - (_pageController.page ?? 0.2);
-          value = (value * 0.02).clamp(-1, 1);
-        }
-        return Transform.translate(
-          offset: index == _pageController.page
-              ? const Offset(0, 0)
-              : const Offset(-50, 10),
-          child: Transform.scale(
-            scale: index == _pageController.page ? 1 : 0.4,
-            child: DishCard(
-              dishInfo: dishList[index],
-            ),
-          ),
-        );
-      }),
     );
   }
 }

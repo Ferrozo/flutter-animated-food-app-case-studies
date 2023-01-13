@@ -5,112 +5,45 @@ class DishCard extends StatelessWidget {
   const DishCard({
     Key? key,
     required this.dishInfo,
+    required this.isActive,
   }) : super(key: key);
 
   final DishModel dishInfo;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
+    final double width = isActive ? 215.0 : 120;
+    final double height = isActive ? 215.0 : 120;
+    final double dishSize = isActive ? 170.0 : 100;
     return Column(
       children: <Widget>[
-        Container(
-          alignment: Alignment.center,
-          width: 250,
-          height: 250,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('src/assets/board_dish.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Image.asset(
-            dishInfo.img,
-            width: 200,
-          ),
-        ),
-        const SizedBox(height: 50),
-        Text(
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          dishInfo.name,
-          style: const TextStyle(
-            fontSize: 25,
-            color: Color.fromARGB(255, 95, 34, 12),
-          ),
-        ),
-        const SizedBox(height: 15),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (int i = 0; i <= 4; i++)
-              Icon(
-                Icons.star,
-                color: i != 4 ? Colors.orange : Colors.grey,
-              ),
-          ],
-        ),
-        const SizedBox(height: 15),
-        Text(
-          '\$${dishInfo.price}',
-          style: const TextStyle(
-            color: Color.fromARGB(255, 95, 34, 12),
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'S',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 95, 34, 12),
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'M',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 95, 34, 12),
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'L',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 95, 34, 12),
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Align(
-          alignment: Alignment.center,
-          child: Container(
+        Transform.translate(
+          offset: Offset(0, isActive ? 0 : 180),
+          child: AnimatedContainer(
+            curve: Curves.easeIn,
+            duration: const Duration(microseconds: 10),
+            alignment: Alignment.center,
+            width: width,
+            height: height,
             decoration: BoxDecoration(
-              color: Colors.orange,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            height: 60,
-            width: 60,
-            child: IconButton(
-              icon: const Icon(
-                Icons.notifications,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {},
+                borderRadius: BorderRadius.circular(100),
+                image: const DecorationImage(
+                  image: AssetImage('src/assets/board_dish.png'),
+                  fit: BoxFit.cover,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: const Color.fromARGB(16, 35, 35, 35),
+                      offset:
+                          isActive ? const Offset(-1, 5) : const Offset(0, 0)),
+                ]),
+            child: Image.asset(
+              dishInfo.img,
+              width: dishSize,
             ),
           ),
-        )
+        ),
       ],
     );
   }
