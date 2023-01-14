@@ -6,10 +6,12 @@ class DishCard extends StatelessWidget {
     Key? key,
     required this.dishInfo,
     required this.isActive,
+    required this.openDetails,
   }) : super(key: key);
 
   final DishModel dishInfo;
   final bool isActive;
+  final Function openDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,8 @@ class DishCard extends StatelessWidget {
         Transform.translate(
           offset: Offset(0, isActive ? 0 : 180),
           child: AnimatedContainer(
-            curve: Curves.easeIn,
-            duration: const Duration(microseconds: 10),
+            curve: const Interval(0.0, 1.0, curve: Curves.easeInExpo),
+            duration: const Duration(microseconds: 500),
             alignment: Alignment.center,
             width: width,
             height: height,
@@ -34,13 +36,18 @@ class DishCard extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                      color: const Color.fromARGB(16, 35, 35, 35),
+                      color: const Color.fromARGB(5, 35, 35, 35),
                       offset:
-                          isActive ? const Offset(-1, 5) : const Offset(0, 0)),
+                          isActive ? const Offset(-1, 10) : const Offset(0, 0)),
                 ]),
-            child: Image.asset(
-              dishInfo.img,
-              width: dishSize,
+            child: InkWell(
+              onTap: () {
+                openDetails();
+              },
+              child: Image.asset(
+                dishInfo.img,
+                width: dishSize,
+              ),
             ),
           ),
         ),

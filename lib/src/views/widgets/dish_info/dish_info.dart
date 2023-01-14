@@ -14,7 +14,7 @@ class DishInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const SizedBox(height: 50),
+        const SizedBox(height: 30),
         Text(
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
