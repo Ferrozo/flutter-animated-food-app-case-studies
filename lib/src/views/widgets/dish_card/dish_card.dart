@@ -23,7 +23,7 @@ class DishCard extends StatelessWidget {
         Transform.translate(
           offset: Offset(0, isActive ? 0 : 180),
           child: AnimatedContainer(
-            curve: const Interval(0.0, 1.0, curve: Curves.easeInExpo),
+            curve: const Interval(0.0, 1.0, curve: Curves.easeInOutQuad),
             duration: const Duration(microseconds: 500),
             alignment: Alignment.center,
             width: width,

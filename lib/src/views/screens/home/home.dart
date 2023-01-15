@@ -81,9 +81,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   left: 18,
                   top: -20,
                   child: RotationTransition(
-                    turns: Tween(begin: 0.75, end: 1.0).animate(
-                      _rotationController,
-                    ),
+                    turns: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+                        parent: _rotationController,
+                        curve: Curves.easeOutCirc)),
                     child: Container(
                       height: 320,
                       width: 320,

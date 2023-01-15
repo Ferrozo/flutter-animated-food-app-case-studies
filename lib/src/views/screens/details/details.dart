@@ -16,6 +16,7 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage>
     with TickerProviderStateMixin {
   late final AnimationController _animationController;
+  bool activeComplementaryIgred = false;
 
   @override
   void initState() {
@@ -76,95 +77,124 @@ class _DetailsPageState extends State<DetailsPage>
           color: Colors.orange,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                alignment: Alignment.center,
-                width: 280,
-                height: 280,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  image: const DecorationImage(
-                    image: AssetImage('src/assets/board_dish.png'),
-                    fit: BoxFit.cover,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 20),
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 40,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 280,
+                    height: 280,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      image: const DecorationImage(
+                        image: AssetImage('src/assets/board_dish.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: RotationTransition(
+                        turns: Tween(begin: 0.0, end: 0.2).animate(
+                            CurvedAnimation(
+                                parent: _animationController,
+                                curve: Curves.decelerate)),
+                        child: Image.asset(
+                          widget.img,
+                          width: 200,
+                        )),
                   ),
                 ),
-                child: RotationTransition(
-                    turns: Tween(begin: 0.0, end: 0.2)
-                        .animate(_animationController),
-                    child: Image.asset(
-                      widget.img,
-                      width: 210,
-                    )),
-              ),
-            ),
-            const SizedBox(height: 50),
-            Text(
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              widget.title,
-              style: const TextStyle(
-                fontSize: 25,
-                color: Color.fromARGB(255, 95, 31, 12),
-              ),
-            ),
-            const SizedBox(height: 15),
-            Text(
-              '\$${widget.price}',
-              style: const TextStyle(
-                color: Color.fromARGB(255, 95, 34, 12),
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (int i = 0; i < 4; i++)
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: EdgeInsets.only(left: i == 0 ? 0 : 10),
-                    width: 45,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Image.asset(
-                      'src/assets/01.png',
-                    ),
+                Positioned(
+                  left: MediaQuery.of(context).size.width / 5,
+                  bottom: 40,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 50),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        widget.title,
+                        style: const TextStyle(
+                          fontSize: 25,
+                          color: Color.fromARGB(255, 95, 31, 12),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Text(
+                        '\$${widget.price}',
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 95, 34, 12),
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (int i = 0; i < 4; i++)
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              margin: EdgeInsets.only(left: i == 0 ? 0 : 10),
+                              width: 45,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Image.asset(
+                                'src/assets/01.png',
+                              ),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          height: 60,
+                          width: 60,
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.notifications,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                activeComplementaryIgred =
+                                    !activeComplementaryIgred;
+                              });
+                            },
+                          ),
+                        ),
+                      )
+                    ],
                   ),
+                ),
+                AnimatedPositioned(
+                  right: activeComplementaryIgred ? 100 : -100,
+                  curve: Curves.easeIn,
+                  top: 8,
+                  duration: const Duration(milliseconds: 500),
+                  child: Container(
+                    color: Colors.red,
+                    width: 50,
+                    height: 50,
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 30),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 60,
-                width: 60,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.notifications,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
