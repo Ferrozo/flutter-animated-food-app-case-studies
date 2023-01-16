@@ -15,33 +15,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final PageController _pageController = PageController(viewportFraction: 0.6);
   late AnimationController _rotationController;
   int _currentPage = 0;
-  final List<DishModel> dishList = [
-    DishModel(
-      name: 'Skillet Chicken',
-      img: 'src/assets/01.png',
-      price: 3.99,
-    ),
-    DishModel(
-      name: 'One-Pot Super ',
-      img: 'src/assets/02.png',
-      price: 4.59,
-    ),
-    DishModel(
-      name: 'Mexican Tortilla ',
-      img: 'src/assets/03.png',
-      price: 2.39,
-    ),
-    DishModel(
-      name: 'Lemon-Garlic',
-      img: 'src/assets/04.png',
-      price: 4.89,
-    ),
-    DishModel(
-      name: 'Grilled Chicken',
-      img: 'src/assets/05.png',
-      price: 5.0,
-    ),
-  ];
+
   @override
   void initState() {
     _pageController.addListener(() {
@@ -78,8 +52,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 Positioned(
-                  left: 18,
-                  top: -20,
+                  left: 19,
+                  top: -22,
                   child: RotationTransition(
                     turns: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                         parent: _rotationController,
@@ -110,26 +84,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         },
                       );
                     },
-                    itemCount: dishList.length,
+                    itemCount: DishList.dishList.length,
                     itemBuilder: (_, currentIndex) {
                       bool activePage = currentIndex == _currentPage;
                       return Column(
                         children: [
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 35),
                           DishCard(
                             openDetails: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (_) => DetailsPage(
-                                    title: dishList[currentIndex].name,
-                                    img: dishList[currentIndex].img,
-                                    price: dishList[currentIndex].price,
+                                    title: DishList.dishList[currentIndex].name,
+                                    img: DishList.dishList[currentIndex].img,
+                                    price:
+                                        DishList.dishList[currentIndex].price,
                                   ),
                                 ),
                               );
                             },
                             isActive: activePage,
-                            dishInfo: dishList[currentIndex],
+                            dishInfo: DishList.dishList[currentIndex],
                           ),
                         ],
                       );
@@ -142,8 +117,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     width: MediaQuery.of(context).size.width,
                     alignment: Alignment.center,
                     child: DishInfo(
-                        dishTitle: dishList[_currentPage].name,
-                        dishPrice: dishList[_currentPage].price),
+                        dishTitle: DishList.dishList[_currentPage].name,
+                        dishPrice: DishList.dishList[_currentPage].price),
                   ),
                 ),
               ],

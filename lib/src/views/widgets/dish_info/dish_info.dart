@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DishInfo extends StatelessWidget {
   const DishInfo({
@@ -29,9 +30,12 @@ class DishInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (int i = 0; i <= 4; i++)
-              Icon(
-                Icons.star,
-                color: i != 4 ? Colors.orange : Colors.grey,
+              Container(
+                margin: EdgeInsets.only(left: i != 0 ? 8 : 0),
+                child: Icon(
+                  FontAwesomeIcons.solidStar,
+                  color: i != 4 ? Colors.orange : Colors.grey,
+                ),
               ),
           ],
         ),
@@ -89,7 +93,7 @@ class DishInfo extends StatelessWidget {
             width: 60,
             child: IconButton(
               icon: const Icon(
-                Icons.notifications,
+                FontAwesomeIcons.bellConcierge,
                 color: Colors.white,
                 size: 30,
               ),
