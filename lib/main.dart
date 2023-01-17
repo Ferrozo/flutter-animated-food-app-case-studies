@@ -7,7 +7,6 @@ void main() {
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
-      systemStatusBarContrastEnforced: false,
     ),
   );
   runApp(const App());

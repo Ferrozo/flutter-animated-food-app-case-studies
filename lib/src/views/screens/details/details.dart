@@ -99,7 +99,7 @@ class _DetailsPageState extends State<DetailsPage>
                       ),
                     ),
                     child: RotationTransition(
-                        turns: Tween(begin: 0.0, end: 0.2).animate(
+                        turns: Tween(begin: 0.0, end: 0.5).animate(
                             CurvedAnimation(
                                 parent: _animationController,
                                 curve: Curves.decelerate)),
@@ -110,19 +110,20 @@ class _DetailsPageState extends State<DetailsPage>
                   ),
                 ),
                 AnimatedPositioned(
-                  left: 140,
+                  left: 110,
                   curve: Curves.decelerate,
-                  top: 100,
+                  top: 70,
                   duration: const Duration(milliseconds: 500),
                   child: Transform.scale(
                     scale: activeMiddleIgred ? 1 : 100,
-                    child: Container(
-                      color: activeMiddleIgred
-                          ? Colors.yellow
-                          : Colors.transparent,
-                      width: 80,
-                      height: 80,
-                      child: Image.asset('src/assets/leaf_circle.png'),
+                    child: Opacity(
+                      opacity: activeMiddleIgred ? 1 : 0,
+                      child: Container(
+                        color: Colors.transparent,
+                        width: 140,
+                        height: 140,
+                        child: Image.asset('src/assets/pepper.png'),
+                      ),
                     ),
                   ),
                 ),
@@ -156,7 +157,7 @@ class _DetailsPageState extends State<DetailsPage>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            for (int i = 1; i <= 2; i++)
+                            for (int i = 1; i <= 4; i++)
                               InkWell(
                                 onTap: i == 1
                                     ? () {
@@ -174,7 +175,7 @@ class _DetailsPageState extends State<DetailsPage>
                                 child: Container(
                                   padding: const EdgeInsets.all(5),
                                   margin:
-                                      EdgeInsets.only(left: i == 1 ? 0 : 10),
+                                      EdgeInsets.only(left: i == 1 ? 0 : 15),
                                   width: 45,
                                   height: 45,
                                   decoration: BoxDecoration(
@@ -220,7 +221,7 @@ class _DetailsPageState extends State<DetailsPage>
                   child: SizedBox(
                     width: 65,
                     height: 65,
-                    child: Image.asset('src/assets/complem_2.png'),
+                    child: Image.asset('src/assets/complem_3.png'),
                   ),
                 ),
               ],
